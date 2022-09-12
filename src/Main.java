@@ -105,35 +105,7 @@ public class Main {
                 case att:
                     PrintAttackMenu(currentPokemon); //printing out the choices of attacks
                     String attack = Scan.nextLine().toLowerCase(Locale.ROOT); //Scans in user input
-                    //for the first move in the current pokemon's moveset, if this is true, the user has typed in the first move
-                    //this if statement block will be repeated for all 4 moves in the pokemon's moveset
-                    for (int i = 0; i<currentPokemon.getMoveset().length; i++){
-                        if (attack.equals(currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT))){
-                            if (currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover") && currentPokemon.getHP() < currentPokemon.getMaxHp()/2){
-                                currentPokemon.setHP(currentPokemon.getHP() + (currentPokemon.getMaxHp()/2));
-                                PrintGame(currentPokemon.getName() + " recovered!", currentPokemon, enemyPokemon);
-                            }
-                            else if (currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover") && currentPokemon.getHP() > currentPokemon.getMaxHp()/2){
-                                currentPokemon.setHP(currentPokemon.getMaxHp());
-                                PrintGame(currentPokemon.getName() + " recovered!", currentPokemon, enemyPokemon);
-                            }
-                            if (enemyPokemon.getWeakness().contains(currentPokemon.getType()) && !currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
-                                enemyPokemon.setHP(enemyPokemon.getHP() - (currentPokemon.getMoveset()[i].getDamage() * 2 * ((currentPokemon.getLevel() + 20) / 20)));
-                                PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName() + " it was super effective!", currentPokemon, enemyPokemon);
-                            }
-
-                            else if (!enemyPokemon.getWeakness().contains(currentPokemon.getType()) && !currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
-                                enemyPokemon.setHP(enemyPokemon.getHP() - (currentPokemon.getMoveset()[i].getDamage() * ((currentPokemon.getLevel() + 20) / 20)));
-                                PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName(), currentPokemon, enemyPokemon);
-                            }
-
-                            if (enemyPokemon.getHP() <= 0){
-                                PrintGame("The enemy " + enemyPokemon.getName() + " fainted, you win!", currentPokemon, enemyPokemon);
-                                System.exit(0);
-                            }
-                        }
-                    }
-
+                    attSwitch(currentPokemon, enemyPokemon, attack);
                     break;
 
                 case bag:
@@ -148,7 +120,7 @@ public class Main {
                                 System.exit(0);
                             }
                             //since the item must be a potion, this else if makes sure you can't heal above max HP, in the case that
-                            //the pokemon is trying to use a potion where it would heal abouve max HP, this sets HP to max
+                            //the pokemon is trying to use a potion where it would heal above max HP, this sets HP to max
                             else if (currentPokemon.getHP() > currentPokemon.getMaxHp() - Bag[i].getHealAmount()){
                                 currentPokemon.setHP(currentPokemon.getMaxHp());
                                 PrintGame("You healed your Pokemon to Max HP!", currentPokemon, enemyPokemon);
@@ -370,5 +342,33 @@ public class Main {
         System.out.println();
         System.out.println("\u001B[4;33m" + "_______________________________" + ANSI_RESET);
         System.out.println(" Who would you like to swap to: ");
+    }
+    public static void attSwitch(Pokemon currentPokemon, Pokemon enemyPokemon, String attack){
+        for (int i = 0; i<currentPokemon.getMoveset().length; i++){
+            if (attack.equals(currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT))){
+                if (currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover") && currentPokemon.getHP() < currentPokemon.getMaxHp()/2){
+                    currentPokemon.setHP(currentPokemon.getHP() + (currentPokemon.getMaxHp()/2));
+                    PrintGame(currentPokemon.getName() + " recovered!", currentPokemon, enemyPokemon);
+                }
+                else if (currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover") && currentPokemon.getHP() > currentPokemon.getMaxHp()/2){
+                    currentPokemon.setHP(currentPokemon.getMaxHp());
+                    PrintGame(currentPokemon.getName() + " recovered!", currentPokemon, enemyPokemon);
+                }
+                if (enemyPokemon.getWeakness().contains(currentPokemon.getType()) && !currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
+                    enemyPokemon.setHP(enemyPokemon.getHP() - (currentPokemon.getMoveset()[i].getDamage() * 2 * ((currentPokemon.getLevel() + 20) / 20)));
+                    PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName() + " it was super effective!", currentPokemon, enemyPokemon);
+                }
+
+                else if (!enemyPokemon.getWeakness().contains(currentPokemon.getType()) && !currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
+                    enemyPokemon.setHP(enemyPokemon.getHP() - (currentPokemon.getMoveset()[i].getDamage() * ((currentPokemon.getLevel() + 20) / 20)));
+                    PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName(), currentPokemon, enemyPokemon);
+                }
+
+                if (enemyPokemon.getHP() <= 0){
+                    PrintGame("The enemy " + enemyPokemon.getName() + " fainted, you win!", currentPokemon, enemyPokemon);
+                    System.exit(0);
+                }
+            }
+        }
     }
 }

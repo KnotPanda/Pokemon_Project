@@ -82,4 +82,7 @@ public class Pokemon {
     public void setColour(int color) {
         this.color = color;
     }
+    public void damageCalc(Pokemon enemy, Attack move){
+
+    }
 }
