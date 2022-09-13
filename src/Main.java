@@ -15,61 +15,61 @@ public class Main {
         // Psyduck creation block
         String psyduckWeak = "Grass Electric";
         Attack[] psyduckMoveset = new Attack[4];
-        psyduckMoveset[0] = new Attack("Water Gun", 40);
-        psyduckMoveset[1] = new Attack("Hydro Pump", 60);
-        psyduckMoveset[2] = new Attack("Ice Beam", 50);
-        psyduckMoveset[3] = new Attack("Recover", 0);
-        Pokemon psyduck = new Pokemon("Psyduck", 90, 85, 60, "Water", psyduckWeak, psyduckMoveset, 34);
+        psyduckMoveset[0] = new Attack("Water Gun", 40,"");
+        psyduckMoveset[1] = new Attack("Hydro Pump", 60,"");
+        psyduckMoveset[2] = new Attack("Ice Beam", 50,"");
+        psyduckMoveset[3] = new Attack("Recover", 0,"");
+        Pokemon psyduck = new Pokemon("Psyduck", 90, 85, 60, "Water", psyduckWeak, psyduckMoveset, 34,"");
         team.add(psyduck);
 
         // Charizard creation block, this Pokémon doesn't get enough love
         String charizardWeak = "Water Ground Rock";
         Attack[] charizardMoveset = new Attack[4];
-        charizardMoveset[0] = new Attack("Ember", 40);
-        charizardMoveset[1] = new Attack("Fire Fang", 45);
-        charizardMoveset[2] = new Attack("Fire Spin", 35);
-        charizardMoveset[3] = new Attack("Recover", 0);
-        Pokemon charizard = new Pokemon("Charizard", 170, 170, 42, "Fire", charizardWeak, charizardMoveset, 31);
+        charizardMoveset[0] = new Attack("Ember", 40,"Burn");
+        charizardMoveset[1] = new Attack("Fire Fang", 45,"Burn");
+        charizardMoveset[2] = new Attack("Fire Spin", 35,"");
+        charizardMoveset[3] = new Attack("Recover", 0,"");
+        Pokemon charizard = new Pokemon("Charizard", 170, 170, 42, "Fire", charizardWeak, charizardMoveset, 31,"");
         team.add(charizard);
 
         // Bulbasaur creation block
         String bulbasaurWeak = "Fire Ice Poison Flying Bug";
         Attack[] bulbasaurMoveset = new Attack[4];
-        bulbasaurMoveset[0] = new Attack("Growl", 0);
-        bulbasaurMoveset[1] = new Attack("Vine Whip", 40);
-        bulbasaurMoveset[2] = new Attack("Razor Leaf", 45);
-        bulbasaurMoveset[3] = new Attack("Seed Bomb", 70);
-        Pokemon bulbasaur = new Pokemon("Bulbasaur", 54, 54, 12, "Grass", bulbasaurWeak, bulbasaurMoveset, 32);
+        bulbasaurMoveset[0] = new Attack("Growl", 0,"");
+        bulbasaurMoveset[1] = new Attack("Vine Whip", 40,"");
+        bulbasaurMoveset[2] = new Attack("Razor Leaf", 45,"");
+        bulbasaurMoveset[3] = new Attack("Seed Bomb", 70,"");
+        Pokemon bulbasaur = new Pokemon("Bulbasaur", 54, 54, 12, "Grass", bulbasaurWeak, bulbasaurMoveset, 32,"");
         team.add(bulbasaur);
 
         // Pidgeot creation block
         String pidgeotWeak = "Fighting";
         Attack[] pidgeotMoveset = new Attack[4];
-        pidgeotMoveset[0] = new Attack("Gust", 40);
-        pidgeotMoveset[1] = new Attack("Hurricane", 50);
-        pidgeotMoveset[2] = new Attack("Tackle", 20);
-        pidgeotMoveset[3] = new Attack("Aerial Ace", 60);
-        Pokemon pidgeot = new Pokemon("Pidgeot", 200, 200, 45, "Normal", pidgeotWeak, pidgeotMoveset, 37);
+        pidgeotMoveset[0] = new Attack("Gust", 40,"");
+        pidgeotMoveset[1] = new Attack("Hurricane", 50,"");
+        pidgeotMoveset[2] = new Attack("Tackle", 20,"");
+        pidgeotMoveset[3] = new Attack("Aerial Ace", 60,"");
+        Pokemon pidgeot = new Pokemon("Pidgeot", 200, 200, 45, "Normal", pidgeotWeak, pidgeotMoveset, 37,"");
         team.add(pidgeot);
 
         // Butterfree creation block
         String butterfreeWeak = "Fire Flying Rock" ;
         Attack[] butterfreeMoveset = new Attack[4];
-        butterfreeMoveset[0] = new Attack("Bug Bite", 60);
-        butterfreeMoveset[1] = new Attack("Psybeam", 55);
-        butterfreeMoveset[2] = new Attack("Tackle", 20);
-        butterfreeMoveset[3] = new Attack("Recover", 0);
-        Pokemon butterfree = new Pokemon("Butterfree", 114, 114, 29, "Bug", butterfreeWeak, butterfreeMoveset, 35);
+        butterfreeMoveset[0] = new Attack("Bug Bite", 60,"");
+        butterfreeMoveset[1] = new Attack("Psybeam", 55,"Confusion");
+        butterfreeMoveset[2] = new Attack("Tackle", 20,"");
+        butterfreeMoveset[3] = new Attack("Recover", 0,"");
+        Pokemon butterfree = new Pokemon("Butterfree", 114, 114, 29, "Bug", butterfreeWeak, butterfreeMoveset, 35,"");
         team.add(butterfree);
 
         // Squirtle creation block
         String squirtleWeak = "Grass Electric";
         Attack[] squirtleMoveset = new Attack[4];
-        squirtleMoveset[0] = new Attack("Water Gun", 40);
-        squirtleMoveset[1] = new Attack("Aqua Tail", 60);
-        squirtleMoveset[2] = new Attack("Water Pulse", 45);
-        squirtleMoveset[3] = new Attack("Recover", 0);
-        Pokemon squirtle = new Pokemon("Squirtle", 160, 160, 47, "Water", squirtleWeak, squirtleMoveset, 34);
+        squirtleMoveset[0] = new Attack("Water Gun", 40,"");
+        squirtleMoveset[1] = new Attack("Aqua Tail", 60,"");
+        squirtleMoveset[2] = new Attack("Water Pulse", 45,"");
+        squirtleMoveset[3] = new Attack("Recover", 0,"");
+        Pokemon squirtle = new Pokemon("Squirtle", 160, 160, 47, "Water", squirtleWeak, squirtleMoveset, 34,"");
         team.add(squirtle);
 
         //pokemon declaration done
@@ -84,15 +84,18 @@ public class Main {
         Pokemon currentPokemon = team.get(0);
         String HoohWeak = "Water Electric Rock";
         Attack[] HoohMoveset = new Attack[4];
-        HoohMoveset[0] = new Attack("Sacred Fire", 100);
-        HoohMoveset[1] = new Attack("Fire Blast", 55);
-        HoohMoveset[2] = new Attack("Burn", 30);
-        HoohMoveset[3] = new Attack("Sky Attack", 50);
-        Pokemon enemyPokemon = new Pokemon("Ho-oh", 1060, 1060, 79, "Fire", HoohWeak, HoohMoveset, 31);
+        HoohMoveset[0] = new Attack("Sacred Fire", 100,"Burn");
+        HoohMoveset[1] = new Attack("Fire Blast", 55,"Burn");
+        HoohMoveset[2] = new Attack("Burn", 30,"Burn");
+        HoohMoveset[3] = new Attack("Sky Attack", 50,"");
+        Pokemon enemyPokemon = new Pokemon("Ho-oh", 1060, 1060, 79, "Fire", HoohWeak, HoohMoveset, 31,"");
 
         //this while loop determines the moves of the game, starts the game
+        int turnCounter = 1;
         System.out.println("The Battle Has Begun!");
         while(!isGameOver){
+            System.out.println("Turn: "+turnCounter);
+            turnCounter++;
             PrintGame("What will you do:", currentPokemon, enemyPokemon);
             Scanner Scan = new Scanner(System.in);
             String input = Scan.nextLine().toLowerCase(Locale.ROOT);
@@ -356,11 +359,19 @@ public class Main {
                 }
                 if (enemyPokemon.getWeakness().contains(currentPokemon.getType()) && !currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
                     enemyPokemon.setHP(enemyPokemon.getHP() - (currentPokemon.getMoveset()[i].getDamage() * 2 * ((currentPokemon.getLevel() + 20) / 20)));
+                    if (!currentPokemon.getMoveset()[i].getStatus().equals("")) {
+                        doStatusEffect(enemyPokemon,currentPokemon.getMoveset()[i]);
+                    }
+                    enemyPokemon.statusEffects();
                     PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName() + " it was super effective!", currentPokemon, enemyPokemon);
                 }
 
                 else if (!enemyPokemon.getWeakness().contains(currentPokemon.getType()) && !currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
                     enemyPokemon.setHP(enemyPokemon.getHP() - (currentPokemon.getMoveset()[i].getDamage() * ((currentPokemon.getLevel() + 20) / 20)));
+                    if (!currentPokemon.getMoveset()[i].getStatus().equals("")) {
+                        doStatusEffect(enemyPokemon,currentPokemon.getMoveset()[i]);
+                    }
+                    enemyPokemon.statusEffects();
                     PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName(), currentPokemon, enemyPokemon);
                 }
 
@@ -369,6 +380,11 @@ public class Main {
                     System.exit(0);
                 }
             }
+        }
+    }
+    public static void doStatusEffect(Pokemon pokemon, Attack attack){
+        if(pokemon.getStatus().equals("")){
+            pokemon.setStatus(attack.getStatus());
         }
     }
 }

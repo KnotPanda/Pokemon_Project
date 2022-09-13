@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Pokemon {
     private String name;
     private int HP;
@@ -7,8 +9,9 @@ public class Pokemon {
     private String weakness;
     private Attack[] moveset;
     private int color;
+    private String status;
 
-    public Pokemon(String name, int HP, int maxHp, int level, String type, String weakness, Attack[] moveset, int color) {
+    public Pokemon(String name, int HP, int maxHp, int level, String type, String weakness, Attack[] moveset, int color, String status) {
         this.name = name;
         this.HP = HP;
         this.maxHp = maxHp;
@@ -17,6 +20,7 @@ public class Pokemon {
         this.weakness = weakness;
         this.moveset = moveset;
         this.color = color;
+        this.status = status;
     }
 
     public String getName() {
@@ -82,7 +86,30 @@ public class Pokemon {
     public void setColour(int color) {
         this.color = color;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public void damageCalc(Pokemon enemy, Attack move){
 
+    }
+
+    public void statusEffects(){
+        switch(this.status){
+            case "Burn":
+                this.HP -= this.maxHp*.05;
+
+            case "Confusion":
+                Random rand = new Random();
+                int num = rand.nextInt(101);
+                if(num>50){
+                    this.HP -= this.maxHp*.10;
+                }
+        }
     }
 }
