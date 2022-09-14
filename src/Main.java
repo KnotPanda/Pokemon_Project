@@ -92,6 +92,7 @@ public class Main {
 
         //this while loop determines the moves of the game, starts the game
         int turnCounter = 1;
+        int effectCounter = 0;
         System.out.println("The Battle Has Begun!");
         while(!isGameOver){
             System.out.println("Turn: "+turnCounter);
@@ -166,6 +167,14 @@ public class Main {
                     else {
                         currentPokemon.setHP(currentPokemon.getHP() - (enemyPokemon.getMoveset()[0].getDamage() * ((currentPokemon.getLevel() + 20) / 20)));
                         PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[3].getName(), currentPokemon, enemyPokemon);
+                    }
+                    if (!currentPokemon.getMoveset()[0].getStatus().equals("")) {
+                        doStatusEffect(enemyPokemon,currentPokemon.getMoveset()[0]);
+                        PrintGame(enemyPokemon+ " has incurred the status effect: " + currentPokemon.getMoveset()[0].getStatus(), currentPokemon, enemyPokemon);
+                    }
+                    enemyPokemon.statusEffects();
+                    if(!enemyPokemon.getStatus().equals("")){
+                        effectCounter++;
                     }
                     if (currentPokemon.getHP() <= 0 && team.size() > 1) {
                         PrintGame("Your pokemon has fainted! Choose a different pokemon to be swapped in!", currentPokemon, enemyPokemon);
@@ -281,6 +290,11 @@ public class Main {
                     }
                     break;
             }
+            if(effectCounter==3){
+                System.out.println(enemyPokemon+"'s "+enemyPokemon.getStatus()+" has ended.");
+                enemyPokemon.setStatus("");
+                effectCounter=0;
+            }
         }
     }
     //PrintGame Method Here // if a pokemon's HP is negative, set it to zero
@@ -347,6 +361,7 @@ public class Main {
         System.out.println(" Who would you like to swap to: ");
     }
     public static void attSwitch(Pokemon currentPokemon, Pokemon enemyPokemon, String attack){
+        int effectCounter = 0;
         for (int i = 0; i<currentPokemon.getMoveset().length; i++){
             if (attack.equals(currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT))){
                 if (currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover") && currentPokemon.getHP() < currentPokemon.getMaxHp()/2){
@@ -359,25 +374,36 @@ public class Main {
                 }
                 if (enemyPokemon.getWeakness().contains(currentPokemon.getType()) && !currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
                     enemyPokemon.setHP(enemyPokemon.getHP() - (currentPokemon.getMoveset()[i].getDamage() * 2 * ((currentPokemon.getLevel() + 20) / 20)));
+                    PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName() + " it was super effective!", currentPokemon, enemyPokemon);
                     if (!currentPokemon.getMoveset()[i].getStatus().equals("")) {
                         doStatusEffect(enemyPokemon,currentPokemon.getMoveset()[i]);
+                        PrintGame("The enemy pokemon has incurred the status effect: " + currentPokemon.getMoveset()[i].getStatus(), currentPokemon, enemyPokemon);
                     }
                     enemyPokemon.statusEffects();
-                    PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName() + " it was super effective!", currentPokemon, enemyPokemon);
+                    if(!enemyPokemon.getStatus().equals("")){
+                        effectCounter++;
+                    }
                 }
-
                 else if (!enemyPokemon.getWeakness().contains(currentPokemon.getType()) && !currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
                     enemyPokemon.setHP(enemyPokemon.getHP() - (currentPokemon.getMoveset()[i].getDamage() * ((currentPokemon.getLevel() + 20) / 20)));
+                    PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName(), currentPokemon, enemyPokemon);
                     if (!currentPokemon.getMoveset()[i].getStatus().equals("")) {
                         doStatusEffect(enemyPokemon,currentPokemon.getMoveset()[i]);
+                        PrintGame("The enemy pokemon has incurred the status effect: " + currentPokemon.getMoveset()[i].getStatus(),currentPokemon,enemyPokemon);
                     }
                     enemyPokemon.statusEffects();
-                    PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName(), currentPokemon, enemyPokemon);
+                    if(!enemyPokemon.getStatus().equals("")){
+                        effectCounter++;
+                    }
                 }
-
                 if (enemyPokemon.getHP() <= 0){
                     PrintGame("The enemy " + enemyPokemon.getName() + " fainted, you win!", currentPokemon, enemyPokemon);
                     System.exit(0);
+                }
+                if(effectCounter==3){
+                    System.out.println(enemyPokemon.getStatus()+" has ended.");
+                    enemyPokemon.setStatus("");
+                    effectCounter=0;
                 }
             }
         }

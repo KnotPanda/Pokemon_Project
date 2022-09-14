@@ -103,13 +103,17 @@ public class Pokemon {
         switch(this.status){
             case "Burn":
                 this.HP -= this.maxHp*.05;
+                System.out.println(this.name + " has been burned");
+                break;
 
             case "Confusion":
                 Random rand = new Random();
                 int num = rand.nextInt(101);
                 if(num>50){
                     this.HP -= this.maxHp*.10;
+                    System.out.println(this.name + " is confused and has attacked itself");
                 }
+                break;
         }
     }
 }
