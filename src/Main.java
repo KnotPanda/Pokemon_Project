@@ -160,21 +160,24 @@ public class Main {
             int enemyTurn = rand.nextInt(6);
             switch (enemyTurn) {
                 case 1:
-                    if (currentPokemon.getWeakness().contains(enemyPokemon.getType())) {
-                        currentPokemon.setHP(currentPokemon.getHP() - (enemyPokemon.getMoveset()[0].getDamage() * 2 * ((currentPokemon.getLevel() + 20) / 20)));
-                        PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[0].getName() + " it was super effective!", currentPokemon, enemyPokemon);
+                    PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[0].getName(), currentPokemon, enemyPokemon);
+                    currentPokemon.damageCalc(enemyPokemon,enemyPokemon.getMoveset()[0]);
+
+                    if (!enemyPokemon.getMoveset()[0].getStatus().equals("") && currentPokemon.getStatus().equals("")) {
+                        doStatusEffect(currentPokemon,enemyPokemon.getMoveset()[0]);
+                        PrintGame(currentPokemon.getName() + " has incurred the status effect: " + enemyPokemon.getMoveset()[0].getStatus(), currentPokemon, enemyPokemon);
                     }
-                    else {
-                        currentPokemon.setHP(currentPokemon.getHP() - (enemyPokemon.getMoveset()[0].getDamage() * ((currentPokemon.getLevel() + 20) / 20)));
-                        PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[3].getName(), currentPokemon, enemyPokemon);
+                    else if (!enemyPokemon.getMoveset()[0].getStatus().equals("") && !currentPokemon.getStatus().equals("")){
+                        PrintGame(currentPokemon.getName() + " has the effect " + currentPokemon.getStatus()+ " already and can't receive an additional status of " +enemyPokemon.getMoveset()[0].getStatus(), currentPokemon, enemyPokemon);
                     }
-                    if (!currentPokemon.getMoveset()[0].getStatus().equals("")) {
-                        doStatusEffect(enemyPokemon,currentPokemon.getMoveset()[0]);
-                        PrintGame(enemyPokemon+ " has incurred the status effect: " + currentPokemon.getMoveset()[0].getStatus(), currentPokemon, enemyPokemon);
-                    }
-                    enemyPokemon.statusEffects();
-                    if(!enemyPokemon.getStatus().equals("")){
+                    currentPokemon.statusEffects();
+                    if(!currentPokemon.getStatus().equals("")){
                         effectCounter++;
+                    }
+                    if(effectCounter == 3){
+                        PrintGame(currentPokemon.getName()+"'s "+ currentPokemon.getStatus()+" has ended.",currentPokemon, enemyPokemon);
+                        currentPokemon.setStatus("");
+                        effectCounter=0;
                     }
                     if (currentPokemon.getHP() <= 0 && team.size() > 1) {
                         PrintGame("Your pokemon has fainted! Choose a different pokemon to be swapped in!", currentPokemon, enemyPokemon);
@@ -193,12 +196,23 @@ public class Main {
                     }
                     break;
                 case 2:
-                    if (currentPokemon.getWeakness().contains(enemyPokemon.getType())) {
-                        currentPokemon.setHP(currentPokemon.getHP() - (enemyPokemon.getMoveset()[1].getDamage() * 2 * ((currentPokemon.getLevel() + 20) / 20)));
-                        PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[1].getName() + " it was super effective!", currentPokemon, enemyPokemon);
-                    } else {
-                        currentPokemon.setHP(currentPokemon.getHP() - (enemyPokemon.getMoveset()[1].getDamage() * ((currentPokemon.getLevel() + 20) / 20)));
-                        PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[3].getName(), currentPokemon, enemyPokemon);
+                    PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[1].getName(), currentPokemon, enemyPokemon);
+                    currentPokemon.damageCalc(enemyPokemon,enemyPokemon.getMoveset()[1]);
+                    if (!enemyPokemon.getMoveset()[1].getStatus().equals("") && currentPokemon.getStatus().equals("")) {
+                        doStatusEffect(currentPokemon,enemyPokemon.getMoveset()[1]);
+                        PrintGame(currentPokemon.getName() + " has incurred the status effect: " + enemyPokemon.getMoveset()[1].getStatus(), currentPokemon, enemyPokemon);
+                    }
+                    else if (!enemyPokemon.getMoveset()[1].getStatus().equals("") && !currentPokemon.getStatus().equals("")){
+                        PrintGame(currentPokemon.getName() + " has the effect " + currentPokemon.getStatus()+ " already and can't receive an additional status of " +enemyPokemon.getMoveset()[1].getStatus(), currentPokemon, enemyPokemon);
+                    }
+                    currentPokemon.statusEffects();
+                    if(!currentPokemon.getStatus().equals("")){
+                        effectCounter++;
+                    }
+                    if(effectCounter == 3){
+                        PrintGame(currentPokemon.getName()+"'s "+ currentPokemon.getStatus()+" has ended.",currentPokemon, enemyPokemon);
+                        currentPokemon.setStatus("");
+                        effectCounter=0;
                     }
                     if (currentPokemon.getHP() <= 0 && team.size() > 1) {
                         PrintGame("Your pokemon has fainted! Choose a different pokemon to be swapped in!", currentPokemon, enemyPokemon);
@@ -217,12 +231,23 @@ public class Main {
                     }
                     break;
                 case 3:
-                    if (currentPokemon.getWeakness().contains(enemyPokemon.getType())) {
-                        currentPokemon.setHP(currentPokemon.getHP() - (enemyPokemon.getMoveset()[2].getDamage() * 2 * ((currentPokemon.getLevel() + 20) / 20)));
-                        PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[2].getName() + " it was super effective!", currentPokemon, enemyPokemon);
-                    } else {
-                        currentPokemon.setHP(currentPokemon.getHP() - (enemyPokemon.getMoveset()[2].getDamage() * ((currentPokemon.getLevel() + 20) / 20)));
-                        PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[3].getName(), currentPokemon, enemyPokemon);
+                    PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[2].getName(), currentPokemon, enemyPokemon);
+                    currentPokemon.damageCalc(enemyPokemon,enemyPokemon.getMoveset()[2]);
+                    if (!enemyPokemon.getMoveset()[2].getStatus().equals("") && currentPokemon.getStatus().equals("")) {
+                        doStatusEffect(currentPokemon,enemyPokemon.getMoveset()[2]);
+                        PrintGame(currentPokemon.getName() + " has incurred the status effect: " + enemyPokemon.getMoveset()[2].getStatus(), currentPokemon, enemyPokemon);
+                    }
+                    else if (!enemyPokemon.getMoveset()[2].getStatus().equals("") && !currentPokemon.getStatus().equals("")){
+                        PrintGame(currentPokemon.getName() + " has the effect " + currentPokemon.getStatus()+ " already and can't receive an additional status of " +enemyPokemon.getMoveset()[2].getStatus(), currentPokemon, enemyPokemon);
+                    }
+                    currentPokemon.statusEffects();
+                    if(!currentPokemon.getStatus().equals("")){
+                        effectCounter++;
+                    }
+                    if(effectCounter == 3){
+                        PrintGame(currentPokemon.getName()+"'s "+ currentPokemon.getStatus()+" has ended.",currentPokemon, enemyPokemon);
+                        currentPokemon.setStatus("");
+                        effectCounter=0;
                     }
                     if (currentPokemon.getHP() <= 0 && team.size() > 1) {
                         PrintGame("Your pokemon has fainted! Choose a different pokemon to be swapped in!", currentPokemon, enemyPokemon);
@@ -241,12 +266,23 @@ public class Main {
                     }
                     break;
                 case 4:
-                    if (currentPokemon.getWeakness().contains(enemyPokemon.getType())) {
-                        currentPokemon.setHP(currentPokemon.getHP() - (enemyPokemon.getMoveset()[3].getDamage() * 2 * ((currentPokemon.getLevel() + 20) / 20)));
-                        PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[3].getName() + " it was super effective!", currentPokemon, enemyPokemon);
-                    } else {
-                        currentPokemon.setHP(currentPokemon.getHP() - (enemyPokemon.getMoveset()[3].getDamage() * ((currentPokemon.getLevel() + 20) / 20)));
-                        PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[3].getName(), currentPokemon, enemyPokemon);
+                    PrintGame(enemyPokemon.getName() + " used " + enemyPokemon.getMoveset()[3].getName(), currentPokemon, enemyPokemon);
+                    currentPokemon.damageCalc(enemyPokemon,enemyPokemon.getMoveset()[3]);
+                    if (!enemyPokemon.getMoveset()[3].getStatus().equals("") && currentPokemon.getStatus().equals("")) {
+                        doStatusEffect(currentPokemon,enemyPokemon.getMoveset()[3]);
+                        PrintGame(currentPokemon.getName() + " has incurred the status effect: " + enemyPokemon.getMoveset()[3].getStatus(), currentPokemon, enemyPokemon);
+                    }
+                    else if (!enemyPokemon.getMoveset()[3].getStatus().equals("") && !currentPokemon.getStatus().equals("")){
+                        PrintGame(currentPokemon.getName() +" has the effect " + currentPokemon.getStatus()+ " already and can't receive an additional status of " +enemyPokemon.getMoveset()[3].getStatus(), currentPokemon, enemyPokemon);
+                    }
+                    currentPokemon.statusEffects();
+                    if(!currentPokemon.getStatus().equals("")){
+                        effectCounter++;
+                    }
+                    if(effectCounter == 3){
+                        PrintGame(currentPokemon.getName()+"'s "+ currentPokemon.getStatus()+" has ended.",currentPokemon, enemyPokemon);
+                        currentPokemon.setStatus("");
+                        effectCounter=0;
                     }
                     if (currentPokemon.getHP() <= 0 && team.size() > 0) {
                         PrintGame("Your pokemon has fainted! Choose a different pokemon to be swapped in!", currentPokemon, enemyPokemon);
@@ -275,6 +311,15 @@ public class Main {
                         enemyPokemon.setHP(enemyPokemon.getHP() + 30);
                         PrintGame("The enemy healed with a potion!", currentPokemon, enemyPokemon);
                     }
+                    currentPokemon.statusEffects();
+                    if(!currentPokemon.getStatus().equals("")){
+                        effectCounter++;
+                    }
+                    if(effectCounter == 3){
+                        PrintGame(currentPokemon.getName()+"'s "+ currentPokemon.getStatus()+" has ended.",currentPokemon, enemyPokemon);
+                        currentPokemon.setStatus("");
+                        effectCounter=0;
+                    }
                     break;
 
                 default:
@@ -288,12 +333,16 @@ public class Main {
                         enemyPokemon.setHP(enemyPokemon.getHP() + 80);
                         PrintGame("The enemy healed with a super potion!", currentPokemon, enemyPokemon);
                     }
+                    currentPokemon.statusEffects();
+                    if(!currentPokemon.getStatus().equals("")){
+                        effectCounter++;
+                    }
+                    if(effectCounter == 3){
+                        PrintGame(currentPokemon.getName()+"'s "+ currentPokemon.getStatus()+" has ended.",currentPokemon, enemyPokemon);
+                        currentPokemon.setStatus("");
+                        effectCounter=0;
+                    }
                     break;
-            }
-            if(effectCounter==3){
-                System.out.println(enemyPokemon+"'s "+enemyPokemon.getStatus()+" has ended.");
-                enemyPokemon.setStatus("");
-                effectCounter=0;
             }
         }
     }
@@ -372,24 +421,15 @@ public class Main {
                     currentPokemon.setHP(currentPokemon.getMaxHp());
                     PrintGame(currentPokemon.getName() + " recovered!", currentPokemon, enemyPokemon);
                 }
-                if (enemyPokemon.getWeakness().contains(currentPokemon.getType()) && !currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
-                    enemyPokemon.setHP(enemyPokemon.getHP() - (currentPokemon.getMoveset()[i].getDamage() * 2 * ((currentPokemon.getLevel() + 20) / 20)));
-                    PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName() + " it was super effective!", currentPokemon, enemyPokemon);
-                    if (!currentPokemon.getMoveset()[i].getStatus().equals("")) {
+                if (!currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
+                    PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName(), currentPokemon, enemyPokemon);
+                    enemyPokemon.damageCalc(currentPokemon, currentPokemon.getMoveset()[i]);
+                    if (!currentPokemon.getMoveset()[i].getStatus().equals("") && enemyPokemon.getStatus().equals("")) {
                         doStatusEffect(enemyPokemon,currentPokemon.getMoveset()[i]);
                         PrintGame("The enemy pokemon has incurred the status effect: " + currentPokemon.getMoveset()[i].getStatus(), currentPokemon, enemyPokemon);
                     }
-                    enemyPokemon.statusEffects();
-                    if(!enemyPokemon.getStatus().equals("")){
-                        effectCounter++;
-                    }
-                }
-                else if (!enemyPokemon.getWeakness().contains(currentPokemon.getType()) && !currentPokemon.getMoveset()[i].getName().toLowerCase(Locale.ROOT).equals("recover")) {
-                    enemyPokemon.setHP(enemyPokemon.getHP() - (currentPokemon.getMoveset()[i].getDamage() * ((currentPokemon.getLevel() + 20) / 20)));
-                    PrintGame(currentPokemon.getName() + " used " + currentPokemon.getMoveset()[i].getName(), currentPokemon, enemyPokemon);
-                    if (!currentPokemon.getMoveset()[i].getStatus().equals("")) {
-                        doStatusEffect(enemyPokemon,currentPokemon.getMoveset()[i]);
-                        PrintGame("The enemy pokemon has incurred the status effect: " + currentPokemon.getMoveset()[i].getStatus(),currentPokemon,enemyPokemon);
+                    else if (!currentPokemon.getMoveset()[i].getStatus().equals("") && !enemyPokemon.getStatus().equals("")){
+                        PrintGame("The enemy pokemon has the effect " + enemyPokemon.getStatus()+ " already and can't receive an additional status of " +currentPokemon.getMoveset()[i].getStatus(), currentPokemon, enemyPokemon);
                     }
                     enemyPokemon.statusEffects();
                     if(!enemyPokemon.getStatus().equals("")){
@@ -401,7 +441,7 @@ public class Main {
                     System.exit(0);
                 }
                 if(effectCounter==3){
-                    System.out.println(enemyPokemon.getStatus()+" has ended.");
+                    PrintGame(enemyPokemon+"'s "+enemyPokemon.getStatus()+" has ended.",currentPokemon, enemyPokemon);
                     enemyPokemon.setStatus("");
                     effectCounter=0;
                 }
