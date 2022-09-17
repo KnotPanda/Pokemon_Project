@@ -96,11 +96,12 @@ public class Pokemon {
     }
 
     public void damageCalc(Pokemon pokemon, Attack move){
-        if(this.getWeakness().contains(pokemon.getType())) {
-           this.setHP(this.getHP() - (move.getDamage() * 2 * ((this.getLevel() + 20) / 20)));
+        if(this.getWeakness().contains(pokemon.getType())) { //Takes super effective moves into consideration
+            //damage calculation formula incorporating pokemon level
+            this.setHP(this.getHP() - (move.getDamage() * 2 * ((this.getLevel() + 20) / 20)));
             System.out.println("The move was super effective!");
         }
-        else{
+        else{ //non-super effective moves
             this.setHP(this.getHP() - (move.getDamage() * ((this.getLevel() + 20) / 20)));
         }
     }
@@ -108,7 +109,7 @@ public class Pokemon {
 
     public void statusEffects(){
         switch(this.status){
-            case "Burn":
+            case "Burn": //If pokemon has burn, 5% of max HP is lost per turn
                 this.HP -= this.maxHp*.05;
                 System.out.println(this.getName() + " has been burned");
                 break;
@@ -116,7 +117,8 @@ public class Pokemon {
             case "Confusion":
                 Random rand = new Random();
                 int num = rand.nextInt(101);
-                if(num>50){
+                if(num>51){ //50% chance for confusion to trigger
+                    //Damages itself for 10% of the pokemon's current health
                     this.HP -= this.HP*.10;
                     System.out.println(this.getName() + " is confused and its own attack has damaged itself a little");
                 }
